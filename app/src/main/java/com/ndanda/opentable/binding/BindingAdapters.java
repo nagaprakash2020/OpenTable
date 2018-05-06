@@ -3,7 +3,10 @@ package com.ndanda.opentable.binding;
 
 import android.databinding.BindingAdapter;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.ndanda.opentable.vo.Resource;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,14 +17,31 @@ import java.util.Locale;
  * Data Binding adapters specific to the app.
  */
 public class BindingAdapters {
-    @BindingAdapter("visibility")
-    public static void showHide(View view, boolean show) {
-        view.setVisibility(show ? View.VISIBLE : View.GONE);
+    @BindingAdapter("showLoading")
+    public static void showLoading(ProgressBar view, Resource resource) {
+        switch (resource.status){
+            case ERROR:
+            case SUCCESS:
+                view.setVisibility(View.GONE);
+                break;
+            case LOADING:
+                view.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
-    @BindingAdapter("setDouble")
-    public static void setDouble(TextView view, double value){
-        view.setText(String.valueOf(value));
+
+    @BindingAdapter("showErrorMessage")
+    public static void showErrorMessage(TextView view,Resource resource){
+        switch (resource.status){
+            case LOADING:
+            case SUCCESS:
+                view.setVisibility(View.GONE);
+                break;
+            case ERROR:
+                view.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @BindingAdapter("date")

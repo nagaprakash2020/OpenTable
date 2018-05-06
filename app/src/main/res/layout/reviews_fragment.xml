@@ -3,21 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="loading" type="boolean"/>
-        <variable name="isError" type="boolean"/>
+        <variable name="resource" type="com.ndanda.opentable.vo.Resource"/>
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="2dp">
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/please_try_again"
-            app:visibility="@{isError}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reviews_recycler_view"
@@ -26,12 +18,20 @@
             android:layout_margin="2dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/reviews_recycler_view"
+            android:text="@string/please_try_again"
+            app:showErrorMessage="@{resource}"/>
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            app:visibility="@{loading}"/>
+            app:showLoading="@{resource}"/>
 
     </RelativeLayout>
 

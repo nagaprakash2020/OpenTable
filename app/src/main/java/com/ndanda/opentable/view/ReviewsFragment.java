@@ -73,23 +73,7 @@ public class ReviewsFragment extends Fragment {
             ViewModelProviders.of(getActivity(), viewModelFactory).get(ResultsViewModel.class).getReviewResults().observe(getActivity(), listResource -> {
 
                 if(listResource != null){
-                    switch (listResource.status){
-                        case LOADING:
-                            // Sets the progress bar visibility to true and visibility of error message text view to false.
-                            binding.get().setLoading(true);
-                            binding.get().setIsError(false);
-                            break;
-                        case SUCCESS:
-                            // Sets the progress bar visibility to false and visibility of error message text view to false.
-                            binding.get().setLoading(false);
-                            binding.get().setIsError(false);
-                            break;
-                        case ERROR:
-                            // Sets the progress bar visibility to false and visibility of error message text view to true.
-                            binding.get().setLoading(false);
-                            binding.get().setIsError(true);
-                            break;
-                    }
+                    binding.get().setResource(listResource);
                     if(listResource.data != null && !listResource.data.isEmpty())
                         adapter.get().replace(listResource.data);
                 }

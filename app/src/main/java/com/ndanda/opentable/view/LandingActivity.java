@@ -14,11 +14,7 @@ public class LandingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ((OpenTableApplication) getApplication())
-                .getApplicationComponent()
-                .inject(this);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_landing);
     }
 
